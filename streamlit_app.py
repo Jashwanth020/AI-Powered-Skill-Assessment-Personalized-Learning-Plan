@@ -52,7 +52,16 @@ Skills: Python, Django, Flask, SQL, MySQL, PostgreSQL, AWS, REST APIs, Git
 
 def init_session():
     if "catalyst_agent" not in st.session_state:
-        api_key = os.environ.get("GROQ_API_KEY", st.session_state.get("api_key", ""))
+        # Try to get API key from environment or Streamlit Cloud secrets
+        api_key = os.environ.get("GROQ_API_KEY")
+        
+        # Try Streamlit Cloud secrets (st.secrets)
+        if not api_key:
+            try:
+                api_key = st.secrets.get("GROQ_API_KEY")
+            except:
+                pass
+        
         if api_key:
             st.session_state.catalyst_agent = CatalystAgent(api_key)
     
