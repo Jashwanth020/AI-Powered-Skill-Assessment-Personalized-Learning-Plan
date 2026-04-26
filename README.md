@@ -1,10 +1,5 @@
 # Catalyst - AI-Powered Skill Assessment & Personalized Learning Plan Agent
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Python-3.10+-blue" alt="Python">
-  <img src="https://img.shields.io/badge/Streamlit-1.30+-red" alt="Streamlit">
-  <img src="https://img.shields.io/badge-Groq-Llama%203.3-green" alt="Groq Llama">
-</p>
 
 <p align="center">
   An AI agent that takes a Job Description and a candidate's resume, assesses real proficiency on each required skill, identifies gaps, and generates a personalized learning plan with curated resources and time estimates.
