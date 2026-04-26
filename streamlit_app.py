@@ -80,7 +80,13 @@ def read_uploaded_file(uploaded_file):
     elif file_type.endswith('.txt'):
         return uploaded_file.read().decode('utf-8')
     else:
-        return uploaded_file.read().decode('utf-8')
+        try:
+            return uploaded_file.read().decode('utf-8')
+        except UnicodeDecodeError:
+            try:
+                return uploaded_file.read().decode('latin-1')
+            except:
+                return uploaded_file.read().decode('utf-8', errors='ignore')
 
 
 def get_score_color(score):
