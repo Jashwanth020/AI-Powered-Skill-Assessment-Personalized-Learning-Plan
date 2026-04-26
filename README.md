@@ -3,7 +3,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Python-3.10+-blue" alt="Python">
   <img src="https://img.shields.io/badge/Streamlit-1.30+-red" alt="Streamlit">
-  <img src="https://img.shields.io/badge/OpenAI-GPT--4o-green" alt="OpenAI">
+  <img src="https://img.shields.io/badge-Groq-Llama%203.3-green" alt="Groq Llama">
 </p>
 
 <p align="center">
@@ -18,39 +18,43 @@
 - **Proficiency Assessment**: Scores candidate proficiency (0-100) based on resume evidence
 - **Gap Analysis**: Identifies critical gaps and adjacent learning opportunities
 - **Learning Plan**: Generates personalized learning paths with resources and time estimates
-- **Interactive UI**: Streamlit web interface for easy interaction
+- **File Upload**: Supports PDF and TXT files for Job Description and Resume
+- **Interactive UI**: Streamlit web interface with file upload support
 
 ---
 
 ## Architecture
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                        FRONTEND                                 │
-│                    (streamlit_app.py)                          │
-│  ┌──────────────┐  ┌─────────────┐  ┌────────────────────────┐  │
-│  │ Job Desc    │  │ Resume     │  │ Assessment Results     │  │
-│  │ Input       │  │ Input      │  │ + Learning Plan        │  │
-│  └──────────────┘  └─────────────┘  └────────────────────────┘  │
-└────────────────────────────┬────────────────────────────────────┘
-                             ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                        BACKEND                                  │
-│                    (agent_engine.py)                           │
-│  ┌─────────────┐  ┌───────────┐  ┌─────────────────────────┐   │
-│  │ Skill      │  │ Assessor │  │ Learning Plan           │   │
-│  │ Parser     │  │          │  │ Generator               │   │
-│  └─────────────┘  └───────────┘  └─────────────────────────┘   │
-└────────────────────────────┬────────────────────────────────────┘
-                             ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                    LLM INTEGRATION                              │
-│                    (OpenAI GPT-4o)                             │
-│  - Skill Extraction from JD                                     │
-│  - Proficiency Scoring                                         │
-│  - Gap Analysis                                                 │
-│  - Learning Plan Generation                                    │
-└─────────────────────────────────────────────────────────────────┘
++------------------------------------------------------------------+
+|                         FRONTEND                                 |
+|                     (streamlit_app.py)                           |
+|  +-------------+  +-------------+  +---------------------------+   |
+|  | Job Desc   |  | Resume     |  | Assessment Results       |   |
+|  | (File/    |  | (File/    |  | + Learning Plan           |   |
+|  |  Text)    |  |  Text)    |  |                           |   |
+|  +-------------+  +-------------+  +---------------------------+   |
++---------------------------+---------------------------------------+
+                            |
+                            v
++------------------------------------------------------------------+
+|                         BACKEND                                  |
+|                     (agent_engine.py)                           |
+|  +------------+  +-----------+  +----------------------------+   |
+|  | Skill    |  | Assessor |  | Learning Plan            |   |
+|  | Parser   |  |          |  | Generator                |   |
+|  +------------+  +-----------+  +----------------------------+   |
++---------------------------+---------------------------------------+
+                            |
+                            v
++------------------------------------------------------------------+
+|                      LLM INTEGRATION                            |
+|                  (Groq API - Llama 3.3 70B)                       |
+|  - Skill Extraction from JD                                     |
+|  - Proficiency Scoring                                         |
+|  - Gap Analysis                                                 |
+|  - Learning Plan Generation                                    |
++------------------------------------------------------------------+
 ```
 
 ### Scoring Logic
@@ -75,21 +79,20 @@
 ### Prerequisites
 
 - Python 3.10+
-- OpenAI API Key
+- Groq API Key (free at https://console.groq.com)
 
 ### Installation
 
 1. **Clone the repository:**
 ```bash
-git clone https://github.com/yourusername/catalyst.git
-cd catalyst
+git clone https://github.com/Jashwanth020/AI-Powered-Skill-Assessment-Personalized-Learning-Plan.git
+cd AI-Powered-Skill-Assessment-Personalized-Learning-Plan
 ```
 
 2. **Create virtual environment:**
 ```bash
 python -m venv venv
 source venv/bin/activate  # Linux/Mac
-# OR
 venv\Scripts\activate  # Windows
 ```
 
@@ -98,26 +101,28 @@ venv\Scripts\activate  # Windows
 pip install -r requirements.txt
 ```
 
-4. **Set environment variable:**
+4. **Set Groq API key:**
 ```bash
 # Linux/Mac
-export OPENAI_API_KEY=sk-your-api-key
+export GROQ_API_KEY=your-groq-api-key
 
 # Windows (PowerShell)
-$env:OPENAI_API_KEY="sk-your-api-key"
+$env:GROQ_API_KEY="your-groq-api-key"
 
 # Windows (Command Prompt)
-set OPENAI_API_KEY=sk-your-api-key
+set GROQ_API_KEY=your-groq-api-key
 ```
+
+Get your free Groq API key at: https://console.groq.com
 
 ### Running the App
 
-**Option 1: Streamlit Web App**
+**Streamlit Web App:**
 ```bash
 streamlit run streamlit_app.py
 ```
 
-**Option 2: Python Script (CLI)**
+**Python Script (CLI):**
 ```bash
 python agent_engine.py
 ```
@@ -128,11 +133,11 @@ python agent_engine.py
 
 1. **Open the app** at `http://localhost:8501`
 
-2. **Enter your OpenAI API key** in the sidebar
+2. **Enter your Groq API key** in the sidebar
 
-3. **Paste Job Description** in the text area
+3. **Upload Job Description** (PDF/TXT) or paste text
 
-4. **Paste Resume** in the text area
+4. **Upload Resume** (PDF/TXT) or paste text
 
 5. **Click "Analyze Skills"**
 
@@ -143,33 +148,21 @@ python agent_engine.py
 
 ---
 
-## Sample Run
+## Sample Output
 
-```python
-from agent_engine import CatalystAgent
-import os
+```
+SKILL ASSESSMENT:
++ Python: 90/100 (Expert) [OK]
++ Machine Learning: 0/100 (Novice) [GAP]
++ SQL: 80/100 (Advanced) [OK]
++ AWS: 90/100 (Expert) [OK]
++ REST APIs: 90/100 (Expert) [OK]
 
-agent = CatalystAgent(os.environ["OPENAI_API_KEY"])
-
-job_description = """
-Software Engineer - Machine Learning
-Requirements:
-- 3+ years Python development
-- ML frameworks (TensorFlow, PyTorch)
-- SQL and database design
-- Cloud platforms (AWS/GCP)
-"""
-
-resume = """
-Senior Software Developer
-- 5 years Python (Django, Flask)
-- Built REST APIs for e-commerce
-- AWS certified
-- Led team of 4
-"""
-
-result = agent.assess(job_description, resume)
-# Returns: assessments, gap_analysis, learning_plan
+LEARNING PLAN:
+Priority 1: Machine Learning
+  Timeline: Week 1-8 (75 hours)
+  Resources: Andrew Ng's ML Course, PyTorch Tutorials
+  First step: Complete ML Crash Course (Week 1-2)
 ```
 
 ---
@@ -178,36 +171,32 @@ result = agent.assess(job_description, resume)
 
 ```
 catalyst/
-├── agent_engine.py          # Main orchestration
-├── skill_parser.py          # Extracts skills from JD
-├── assessor.py              # Assesses proficiency
-├── gap_analyzer.py         # Identifies gaps
-├── learning_plan_generator.py  # Creates learning plan
-├── streamlit_app.py         # Web UI
-├── requirements.txt       # Dependencies
-├── sample_data.json       # Sample inputs/outputs
-├── SPEC.md               # Detailed specification
-└── README.md             # This file
++ agent_engine.py              # Main orchestration
++ skill_parser.py             # Extracts skills from JD
++ assessor.py                 # Assesses proficiency
++ gap_analyzer.py             # Identifies gaps
++ learning_plan_generator.py # Creates learning plan
++ streamlit_app.py           # Web UI with file upload
++ requirements.txt          # Dependencies (groq, streamlit, PyPDF2)
++ README.md                  # Setup instructions
++ SPEC.md                   # Full specification
++ sample_data.json          # Sample inputs/outputs
 ```
 
 ---
 
-## API Keys
+## Tech Stack
 
-Get your OpenAI API key from: https://platform.openai.com/api-keys
-
-> **Note:** The app uses GPT-4o which requires API billing setup. Token usage is approximately:
-> - Skill Extraction: ~500 tokens
-> - Assessment: ~1000 tokens
-> - Gap Analysis: ~500 tokens
-> - Learning Plan: ~1000 tokens
-> - **Total: ~3000 tokens per analysis**
+- **Frontend**: Streamlit
+- **Backend**: Python
+- **LLM**: Groq API (Llama 3.3 70B)
+- **File Processing**: PyPDF2
 
 ---
 
 ## License
 
-MIT License - See LICENSE file for details.
+MIT License
 
 ---
 
