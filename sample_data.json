@@ -1,0 +1,113 @@
+{
+  "sample_inputs": {
+    "job_description": {
+      "role": "Software Engineer - Machine Learning",
+      "content": "Requirements:\n- 3+ years Python development experience\n- Experience with ML frameworks (TensorFlow, PyTorch)\n- Strong SQL and database design skills\n- Cloud platforms experience (AWS or GCP)\n- Experience with REST APIs and microservices\n- Strong problem-solving skills\n- Excellent communication skills\n- BS/MS in Computer Science or related field"
+    },
+    "resume": {
+      "candidate": "John Smith",
+      "content": "Experience:\n- 5 years Python development (Django, Flask, FastAPI)\n- Built REST APIs serving 1M+ requests/day for e-commerce\n- MySQL and PostgreSQL database design and optimization\n- AWS certified Solutions Architect\n- Led team of 4 developers at TechCorp\n- Computer Science degree from State University\n\nSkills: Python, Django, Flask, SQL, MySQL, PostgreSQL, AWS, REST APIs, Git"
+    }
+  },
+  "sample_outputs": {
+    "extracted_skills": [
+      {"name": "Python", "category": "Technical", "proficiency_level": "Senior", "importance": "must-have", "years_experience": 3},
+      {"name": "Machine Learning", "category": "Technical", "proficiency_level": "Mid", "importance": "must-have", "years_experience": 1},
+      {"name": "SQL/Database", "category": "Technical", "proficiency_level": "Senior", "importance": "must-have", "years_experience": 3},
+      {"name": "Cloud Platforms", "category": "Tools", "proficiency_level": "Senior", "importance": "must-have", "years_experience": 2},
+      {"name": "REST APIs", "category": "Technical", "proficiency_level": "Senior", "importance": "must-have", "years_experience": 3},
+      {"name": "Problem Solving", "category": "Soft", "proficiency_level": "Senior", "importance": "must-have", "years_experience": 3},
+      {"name": "Communication", "category": "Soft", "proficiency_level": "Senior", "importance": "must-have", "years_experience": 3}
+    ],
+    "assessments": [
+      {"skill": "Python", "score": 85, "level": "Advanced", "evidence": "5 years professional Python development with Django, Flask, FastAPI", "reasoning": "Strong evidence of advanced Python skills across multiple frameworks"},
+      {"skill": "Machine Learning", "score": 20, "level": "Novice", "evidence": "No ML experience mentioned", "reasoning": "No evidence of ML frameworks, algorithms, or projects"},
+      {"skill": "SQL/Database", "score": 75, "level": "Advanced", "evidence": "MySQL and PostgreSQL database design and optimization", "reasoning": "Clear evidence of database design skills"},
+      {"skill": "Cloud Platforms", "score": 70, "level": "Advanced", "evidence": "AWS certified Solutions Architect", "reasoning": "Professional AWS certification demonstrates cloud expertise"},
+      {"skill": "REST APIs", "score": 80, "level": "Advanced", "evidence": "Built REST APIs serving 1M+ requests/day for e-commerce", "reasoning": "Strong production API experience with scale"},
+      {"skill": "Problem Solving", "score": 75, "level": "Advanced", "evidence": "5 years software development solving complex problems", "reasoning": "Senior developer role implies strong problem-solving"},
+      {"skill": "Communication", "score": 70, "level": "Advanced", "evidence": "Led team of 4 developers", "reasoning": "Team leadership demonstrates communication skills"}
+    ],
+    "gap_analysis": {
+      "critical_gaps": [
+        {"skill": "Machine Learning", "current_score": 20, "target_score": 60, "gap_size": 40, "learnability_score": 75, "reasoning": "Python foundation makes ML learning easier; many resources available"}
+      ],
+      "secondary_gaps": [],
+      "adjacent_opportunities": [
+        {"current_skill": "Python", "adjacent_skill": "PyTorch/TensorFlow", "correlation": "Python is foundation for ML frameworks", "learning_ease": "high"},
+        {"current_skill": "REST APIs", "adjacent_skill": "TensorFlow Serving", "correlation": "ML model deployment extends API skills", "learning_ease": "medium"},
+        {"current_skill": "AWS", "adjacent_skill": "SageMaker", "correlation": "AWS ecosystem - natural extension", "learning_ease": "high"}
+      ],
+      "summary": "Candidate has strong technical foundation. Primary gap is ML experience. Python skills provide good foundation for ML frameworks. AWS experience beneficial for cloud-based ML."
+    },
+    "learning_plan": [
+      {
+        "skill": "Machine Learning Foundations",
+        "priority": 1,
+        "weeks": "Week 1-4",
+        "resources": [
+          {"name": "Andrew Ng's ML Course", "type": "course", "url": "coursera.org/learn/machine-learning", "cost": "free", "hours": 40},
+          {"name": "3Blue1Brown Neural Networks", "type": "youtube", "url": "youtube.com/c/3Blue1Brown", "cost": "free", "hours": 4},
+          {"name": "sentdex Python ML", "type": "youtube", "url": "youtube.com/sentdex", "cost": "free", "hours": 10}
+        ],
+        "milestones": [
+          "Week 1: Complete linear regression modules",
+          "Week 2: Complete neural networks intro",
+          "Week 3: Complete deep learning basics",
+          "Week 4: Build first ML project"
+        ],
+        "total_hours": 54,
+        "target_proficiency": "Intermediate",
+        "actionable_first_step": "Sign up for Andrew Ng's ML course on Coursera",
+        "reasoning": "Best foundational ML course with Python exercises"
+      },
+      {
+        "skill": "PyTorch or TensorFlow",
+        "priority": 2,
+        "weeks": "Week 5-8",
+        "resources": [
+          {"name": "PyTorch Deep Learning Course", "type": "course", "url": "pytorch.org/tutorials", "cost": "free", "hours": 20},
+          {"name": "Fast.ai Course", "type": "course", "url": "course.fast.ai", "cost": "free", "hours": 20},
+          {"name": "TensorFlow Developer Cert", "type": "certification", "url": "tensorFlow.org/cert", "cost": "paid", "hours": 30}
+        ],
+        "milestones": [
+          "Week 5: Complete PyTorch tutorials",
+          "Week 6: Build image classifier project",
+          "Week 7: Build NLP project",
+          "Week 8: Prepare for certification"
+        ],
+        "total_hours": 70,
+        "target_proficiency": "Advanced",
+        "actionable_first_step": "Complete PyTorch beginner tutorial",
+        "reasoning": "Practical framework skills needed for job"
+      },
+      {
+        "skill": "ML in Production",
+        "priority": 3,
+        "weeks": "Week 9-12",
+        "resources": [
+          {"name": "MLE Foundational Course", "type": "course", "url": "madewithml.com", "cost": "free", "hours": 30},
+          {"name": "AWS SageMaker", "type": "course", "url": "aws.amazon.com/sagemaker", "cost": "paid", "hours": 15},
+          {"name": "Docker for ML", "type": "project", "url": "github.com/docker", "cost": "free", "hours": 10}
+        ],
+        "milestones": [
+          "Week 9: Deploy ML model with Flask/FastAPI",
+          "Week 10: Containerize with Docker",
+          "Week 11: Deploy to cloud (SageMaker)",
+          "Week 12: Build portfolio project"
+        ],
+        "total_hours": 55,
+        "target_proficiency": "Intermediate",
+        "actionable_first_step": "Create Flask API for ML model",
+        "reasoning": "Production ML skills highly valued"
+      }
+    ],
+    "summary": {
+      "total_skills_required": 7,
+      "skills_strong": 6,
+      "skills_gapped": 1,
+      "total_learning_hours": 179,
+      "estimated_completion": "3 months"
+    }
+  }
+}
